@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven 3' // Ensure Maven 3 is configured in Jenkins (Global Tool Configuration)
-    }
-
     stages {
         stage('Checkout') {
             steps {
