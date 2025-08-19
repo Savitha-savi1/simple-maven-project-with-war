@@ -25,7 +25,7 @@ pipeline {
                 echo 'Deploying WAR to Tomcat...'
                 sh '''
                 WAR_FILE=$(ls target/*.war | head -n 1)
-                sudo cp $WAR_FILE /var/lib/tomcat/webapps/
+                cp $WAR_FILE /home/ec2-user/apache-tomcat-9.0.108/webapps/
                 '''
             }
         }
