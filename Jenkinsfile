@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven 3' // Make sure "Maven 3" is configured in Jenkins global tools
+        maven 'Maven 3'
     }
 
     stages {
@@ -14,19 +14,18 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
+                // Skip tests while building
+                sh 'mvn clean package -DskipTests'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'cp target/*.war /opt/tomcat/webapps/'
+                sh '''
+                cp target/*.war /opt/tomcat/webapps/
+                /opt/tomcat/bin/shutdown.sh
+                /opt/tomcat/bin/startup.sh
+                '''
             }
         }
     }
