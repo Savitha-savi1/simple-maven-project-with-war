@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/<your-username>/simple-maven-project-with-war.git'
+                git url: 'https://github.com/Savitha-savi1/simple-maven-project-with-war', branch: 'main'
+'
             }
         }
 
