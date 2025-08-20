@@ -1,40 +1,33 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven 3' // Make sure "Maven 3" is configured in Jenkins global tools
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Savitha-savi1/simple-maven-project-with-war.git'
+                git branch: 'main', url: 'https://github.com/<your-username>/simple-maven-project-with-war.git'
             }
         }
 
         stage('Build') {
             steps {
-                // Build WAR and skip tests (since none exist)
-                sh 'mvn clean package -DskipTests'
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying WAR to Tomcat...'
-                sh '''
-                # Find the WAR file
-                WAR_FILE=$(ls target/*.war | head -n 1)
-                
-                # Copy to Tomcat webapps
-                cp $WAR_FILE /home/ec2-user/apache-tomcat-9.0.108/webapps/
-                
-                # Restart Tomcat safely
-                /home/ec2-user/apache-tomcat-9.0.108/bin/shutdown.sh || true
-                /home/ec2-user/apache-tomcat-9.0.108/bin/startup.sh
-                '''
+                sh 'cp target/*.war /opt/tomcat/webapps/'
             }
         }
-    }
-
-    post {
-        success { echo 'Deployment Successful! 🎉' }
-        failure { echo 'Build Failed ❌ Check console logs.' }
     }
 }
