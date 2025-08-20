@@ -9,7 +9,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 git url: 'https://github.com/Savitha-savi1/simple-maven-project-with-war', branch: 'main'
-'
             }
         }
 
