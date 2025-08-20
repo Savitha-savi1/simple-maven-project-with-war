@@ -20,13 +20,19 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                sh '''
-                cp target/*.war /opt/tomcat/webapps/
-                /opt/tomcat/bin/shutdown.sh
-                /opt/tomcat/bin/startup.sh
-                '''
-            }
-        }
+    steps {
+        sh '''
+        # Stop Tomcat
+        /opt/tomcat/bin/shutdown.sh
+
+        # Copy WAR
+        cp target/simple-war-app-1.0-SNAPSHOT.war /opt/tomcat/webapps/
+
+        # Start Tomcat
+        /opt/tomcat/bin/startup.sh
+        '''
+    }
+}
+
     }
 }
