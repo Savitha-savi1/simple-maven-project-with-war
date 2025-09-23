@@ -31,3 +31,4 @@ simple-war-app/
 ## Notes
 
 - No Java code is strictly required for a static homepage. If you wish to add servlets or backend functionality, add Java classes under `src/main/java` and map them in `web.xml`.
+test
