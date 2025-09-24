@@ -1,5 +1,5 @@
 # webhook-trigger update
-# 
+# updated
 # Simple Maven WAR Project
 
 ## Structure
